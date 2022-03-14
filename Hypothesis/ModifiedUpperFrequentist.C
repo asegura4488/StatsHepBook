@@ -1,0 +1,63 @@
+ double No = 0.;
+ double Nb = 0.;
+ double Ns = 1.;
+
+
+double GetCLs(double mu){
+
+  double CLb  =  TMath::Prob(2.*(Nb),2*(1.+No));
+  double CLsb =  TMath::Prob(2.*(mu*Ns+Nb),2*(1.+No));
+
+  return CLsb/CLb;
+
+}
+
+void ModifiedUpperFrequentist(){
+
+  
+  int N = 150;
+  double *Mu = new double[N];
+  double *pvalue = new double[N];
+  double *Epvalue = new double[N];
+
+  double mu = 0.;
+  
+  for(int i = 0; i < N; i++){
+  	Mu[i] = mu;
+  	pvalue[i] = GetCLs(mu);
+  	Epvalue[i] = 0.05;
+  	mu += 0.05;
+  }
+
+  TCanvas *c = new TCanvas("c","Canvas",200,200,800,800);
+
+  TGraph *gr1 = new TGraph(N,Mu,pvalue);
+  TGraph *gr2 = new TGraph(N,Mu,Epvalue);
+  
+  gr1->SetTitle("Modified frequentist pvalue scan");
+  
+  gr1->SetLineColor(4);
+  gr1->SetLineWidth(3);
+ 
+  gr1->GetXaxis()->SetTitle("#mu");
+  gr1->GetXaxis()->SetTitleSize(0.06);
+  gr1->GetXaxis()->SetTitleOffset(0.6);
+  
+  gr1->GetYaxis()->SetTitle("p-value");
+  gr1->GetYaxis()->SetTitleSize(0.06);
+  gr1->GetYaxis()->SetTitleOffset(0.6);
+  
+  gr2->SetLineColor(2);
+  gr2->SetLineWidth(3);
+
+  gr1->Draw("AL");
+  gr2->Draw("same");
+
+  c->SaveAs("ModifiedCL.pdf");
+}
+
+int main (){
+
+ ModifiedUpperFrequentist();
+ return 0;
+}
