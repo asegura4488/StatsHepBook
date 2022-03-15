@@ -1,5 +1,5 @@
  double No = 0.;
- double Nb = 0.;
+ double Nb = 5.;
  double Ns = 1.;
 
 
@@ -31,7 +31,7 @@ double GetUpperLimit(int N, double *Mu, double *pvalue){
 void ModifiedUpperFrequentist(){
 
   
-  int N = 10000;
+  int N = 20000;
   double *Mu = new double[N];
   double *pvalue = new double[N];
   double *Epvalue = new double[N];
