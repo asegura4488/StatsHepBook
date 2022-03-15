@@ -12,10 +12,26 @@ double GetCLs(double mu){
 
 }
 
+double GetUpperLimit(int N, double *Mu, double *pvalue){
+
+  double upper = -1.;
+  double delta = 0.0002;
+  
+  for(int i = 0; i < N; i++){
+        if ( abs(pvalue[i]-0.05) < delta ){
+  	//std::cout << Mu[i] << " " << pvalue[i] << std::endl;
+  	upper = Mu[i];
+  	}
+  }
+  
+  
+  return upper;  
+}
+
 void ModifiedUpperFrequentist(){
 
   
-  int N = 150;
+  int N = 10000;
   double *Mu = new double[N];
   double *pvalue = new double[N];
   double *Epvalue = new double[N];
@@ -26,8 +42,12 @@ void ModifiedUpperFrequentist(){
   	Mu[i] = mu;
   	pvalue[i] = GetCLs(mu);
   	Epvalue[i] = 0.05;
-  	mu += 0.05;
+  	mu += 0.001;
   }
+
+
+  double upperlimit = GetUpperLimit(N,Mu,pvalue);
+  std::cout << upperlimit << std::endl;
 
   TCanvas *c = new TCanvas("c","Canvas",200,200,800,800);
 
