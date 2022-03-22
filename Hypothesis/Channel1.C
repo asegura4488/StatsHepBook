@@ -83,7 +83,7 @@ void Channel1(){
 	// Data
 	TH1D *HData = new TH1D("HData","HData",3,0.,3.);
 	SetHistoStyle(HData,"m(#rho)[GeV]","Events",0);
-	HData->SetBinContent(2,3);
+	HData->SetBinContent(2,3.0);
 	HData->Sumw2();
 
 
