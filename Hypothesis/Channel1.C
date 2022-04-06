@@ -83,22 +83,22 @@ void Channel1(){
 	// Data
 	TH1D *HData = new TH1D("HData","HData",3,0.,3.);
 	SetHistoStyle(HData,"m(#rho)[GeV]","Events",0);
-	HData->SetBinContent(2,3.0);
+	HData->SetBinContent(2,105.0);
 	HData->Sumw2();
 
 
 	// Background
 	TH1D *HBkg = new TH1D("HBkg","HBkg",3,0.,3.);
 	SetHistoStyle(HBkg,"m(#rho)[GeV]","Events",1);
-	HBkg->SetBinContent(2,3.5);
+	HBkg->SetBinContent(2,100.0);
 	HBkg->Sumw2();
 	//Limits
-	SetHistoLimits(HBkg,0.,3.,0.,7.0);
+	SetHistoLimits(HBkg,0.,3.,0.,160.0);
 
 	// Signal 
 	TH1D *HSignal = new TH1D("HSignal","HSignal",3,0.,3.);
 	SetHistoStyle(HSignal,"m(#rho)[GeV]","Events",2);
-	HSignal->SetBinContent(2,3.5+1);
+	HSignal->SetBinContent(2,100.+10.);
 	HSignal->Sumw2();
 	HSignal->SetBinError(2,0.02);
 
